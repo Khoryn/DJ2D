@@ -62,11 +62,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_Translate.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
+    <Compile Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Art\Particles\RainMaker\Prefab\BaseRainScript.cs" />
     <Compile Include="Assets\Art\Particles\RainMaker\Prefab\RainCollision.cs" />
     <Compile Include="Assets\Art\Particles\RainMaker\Prefab\RainScript.cs" />
     <Compile Include="Assets\Art\Particles\RainMaker\Prefab\RainScript2D.cs" />
+    <Compile Include="Assets\Scripts\Background\Parallax Final\Script\BackGround\BackGround.cs" />
+    <Compile Include="Assets\Scripts\Background\Parallax Final\Script\BackGround\BackGroundLayer.cs" />
     <Compile Include="Assets\Scripts\Background\Parallax\Parallax.cs" />
+    <Compile Include="Assets\Scripts\Background\backgroundLoop.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
@@ -79,10 +92,16 @@
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Raycast\RaycastController.cs" />
+    <Compile Include="Assets\Scripts\Volume\Volume.cs" />
     <None Include="Assets\Art\Environment\Ciconia Studio\2D Environment\Black&amp;White 2D Forest\Shader\Animated Fog ASE.shader" />
-    <None Include="Assets\Art\Background\Run Like Hell assets\Read Me.txt" />
+    <None Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
+    <None Include="Assets\Art\Particles\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
+    <None Include="Assets\Art\Particles\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+    <None Include="Assets\Art\NPC\Elrynd\Hero_Knight_2\License.txt" />
     <None Include="Assets\Art\Particles\RainMaker\Prefab\RainShader.shader" />
     <None Include="Assets\Art\Lights\HardLight2D\Material\AdditiveShader.shader" />
+    <None Include="Assets\Scripts\Background\Parallax Final\Script\BackGround\Readme(BackGround).txt" />
+    <None Include="Assets\Art\Particles\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

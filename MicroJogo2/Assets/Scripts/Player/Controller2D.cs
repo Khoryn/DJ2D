@@ -140,6 +140,7 @@ public class Controller2D : RaycastController
                 if (hit.collider.tag == "Death")
                 {
                     playerDeath = true;
+                    Debug.Log("dead");
                 }
 
                 if (hit.collider.tag == "Through")

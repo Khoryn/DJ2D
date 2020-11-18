@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     private float moveSpeed;
     private float accelerationTimeAirborne = .2f;
     private float accelerationTimeGrounded = .1f;
-    Vector2 input;
+    private Vector2 input;
 
     private float minJumpVelocity;
     private float maxJumpVelocity;
@@ -40,9 +40,13 @@ public class Player : MonoBehaviour
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
 
-    [Header("Light Settings")]
-    [SerializeField]
-    private HardLight2D playerLight;
+    [Header("Player Initial Settings")]
+    public Vector2 initialPosition;
+    public Vector2 playerCheckpoint;
+
+    //[Header("Light Settings")]
+    //[SerializeField]
+    //private HardLight2D playerLight;
 
     Vector2 directionalInput;
     bool wallSliding;
@@ -53,16 +57,12 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public float distanceToNPC;
 
-    [Header("Stamina Bar")]
-    public GameObject staminaBar;
-    public float currentSprint, maxSprint;
-
     private Animator anim;
 
     Controller2D controller;
     DialogueManager dialogueManager;
-
     GUIManager guiManager;
+    CameraFollowPlayer camera;
 
     [HideInInspector]
     public State state;
@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
         dialogueManager = FindObjectOfType<DialogueManager>();
         guiManager = FindObjectOfType<GUIManager>();
         controller = GetComponent<Controller2D>();
+        camera = FindObjectOfType<CameraFollowPlayer>();
 
         // Gravity and jump velocity initial values;
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -86,7 +87,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
 
         //Light
-        playerLight.gameObject.SetActive(false);
+        //playerLight.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -94,27 +95,27 @@ public class Player : MonoBehaviour
         // Synchronize all transform physics
         Physics2D.SyncTransforms();
 
-        // Player Movement
-        Movement();
-        PlayerIncreasedSpeed();
+        if (!guiManager.pauseGameMenu.activeInHierarchy && !guiManager.mainMenu.activeInHierarchy && !guiManager.deathPanel.gameObject.activeInHierarchy)
+        {
+            // Player Movement
+            Movement();
+            PlayerIncreasedSpeed();
 
-        // Dialogue
-        StartCoroutine(Dialogue());
-        guiManager.ToggleDialogueTextStart(distanceToNPC);
+            // Dialogue
+            StartCoroutine(Dialogue());
+            guiManager.ToggleDialogueTextStart(distanceToNPC);
 
-        // Player Death
-        DeathOnCollision();
+            // Player Death
+            DeathOnCollision();
 
-        // Animations
-        RunAnimation();
-        JumpAnimation();
-        FallingAnimation();
+            // Animations
+            RunAnimation();
+            JumpAnimation();
+            FallingAnimation();
 
-        // Light
-        TurnLightOnAndOff();
-
-        // Stamina Bar
-        //StaminaBar();
+            // Checkpoints
+            SetNewPlayerCheckpoint(5);
+        }
     }
 
     #region Movement
@@ -226,11 +227,11 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Animations and dialogue
-  
+
     public DialogueTrigger GetClosestNPC(List<DialogueTrigger> npcs, Transform fromThis)
     {
         DialogueTrigger nearestTarget = null;
-        distanceToNPC = 3;
+        distanceToNPC = 5;
         Vector3 currentPosition = fromThis.position;
         foreach (DialogueTrigger potentialTarget in npcs)
         {
@@ -270,34 +271,23 @@ public class Player : MonoBehaviour
     {
         if (controller.playerDeath)
         {
-            Debug.Log("Dead");
+            controller.playerDeath = false;
+            velocity.x = 0;
+            transform.position = playerCheckpoint;
+            StartCoroutine(guiManager.Fade(3f));
         }
     }
 
     private void PlayerIncreasedSpeed()
     {
-        if (Input.GetButton("L2") && controller.collisions.below && currentSprint <= maxSprint)
+        if (Input.GetButton("L2") && controller.collisions.below)
         {
             moveSpeed = boostedMoveSpeed;
-            if (currentSprint < maxSprint)
-            {
-                currentSprint -= Time.deltaTime;
-            }
         }
         else
         {
             moveSpeed = initialMoveSpeed;
-
-            if (currentSprint <= maxSprint)
-            {
-                currentSprint += Time.deltaTime;
-            }
         }
-    }
-
-    private void StaminaBar()
-    {
-        staminaBar.transform.localScale = new Vector3(currentSprint, 1, 1);
     }
 
     private void AnimTrigger(string triggerName)
@@ -339,6 +329,7 @@ public class Player : MonoBehaviour
         {
             AnimTrigger("Jump");
         }
+
     }
 
     private void FallingAnimation()
@@ -352,19 +343,40 @@ public class Player : MonoBehaviour
 
     #region Lights
 
-    private void TurnLightOnAndOff()
+    //private void TurnLightOnAndOff()
+    //{
+    //    if (Input.GetButtonDown("Triangle"))
+    //    {
+    //        if (!playerLight.gameObject.activeInHierarchy)
+    //        {
+    //            playerLight.gameObject.SetActive(true);
+    //        }
+    //        else
+    //        {
+    //            playerLight.gameObject.SetActive(false);
+    //        }
+    //        Debug.Log("Light");
+    //    }
+    //}
+
+    #endregion
+
+    #region Checkpoints
+
+
+    private void SetNewPlayerCheckpoint(float distanceToCheckpoint)
     {
-        if (Input.GetButtonDown("Triangle"))
+        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        Vector2 tempCheckpoint;
+        foreach (GameObject checkpoint in checkpoints)
         {
-            if (!playerLight.gameObject.activeInHierarchy)
+            float distance = Vector2.Distance(transform.position, checkpoint.transform.position);
+
+            if (distance < distanceToCheckpoint)
             {
-                playerLight.gameObject.SetActive(true);
+                tempCheckpoint = checkpoint.transform.position;
+                playerCheckpoint = tempCheckpoint;
             }
-            else
-            {
-                playerLight.gameObject.SetActive(false);
-            }
-            Debug.Log("Light");
         }
     }
 

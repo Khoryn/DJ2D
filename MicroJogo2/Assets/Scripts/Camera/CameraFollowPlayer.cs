@@ -54,13 +54,13 @@ public class CameraFollowPlayer : MonoBehaviour
         currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothLookVelocityX, lookSmoothTimeX);
         focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
         focusPosition += Vector2.right * currentLookAheadX;
-     
+
         transform.position = (Vector3)focusPosition + Vector3.forward * -10;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(1,0,0,.5f);
+        Gizmos.color = new Color(1, 0, 0, .5f);
         Gizmos.DrawCube(focusArea.center, focusAreaSize);
     }
 
@@ -78,7 +78,7 @@ public class CameraFollowPlayer : MonoBehaviour
             bottom = targetBounds.min.y;
             top = targetBounds.min.y + size.y;
 
-            center = new Vector2((left + right) /2, (top + bottom)/2);
+            center = new Vector2((left + right) / 2, (top + bottom) / 2);
             velocity = Vector2.zero;
         }
 
