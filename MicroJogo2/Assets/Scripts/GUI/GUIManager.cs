@@ -68,7 +68,7 @@ public class GUIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Options") && !mainMenu.activeInHierarchy)
+        if (Input.GetButtonDown("Options") && !deathPanel.gameObject.activeInHierarchy)
         {
             PauseGame();
 
@@ -212,6 +212,7 @@ public class GUIManager : MonoBehaviour
 
     public IEnumerator Fade(float time)
     {
+        mainMenu.SetActive(false);
         deathPanel.gameObject.SetActive(true);
         for (float t = 0.01f; t < time;)
         {
@@ -223,7 +224,7 @@ public class GUIManager : MonoBehaviour
        
         // Resets
         yield return new WaitForSeconds(1f);
-        mainMenu.SetActive(false);
+        
         pauseGameMenu.SetActive(false);
         deathPanel.gameObject.SetActive(false);
         canvasGroup.alpha = 1;

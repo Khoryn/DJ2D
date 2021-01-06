@@ -11,10 +11,12 @@ public class Volume : MonoBehaviour
     public AudioMixer mixer;
     public string parameterName;
 
+    float savedVol;
+
     private void Awake()
     {
         // Main Menu Slider
-        float savedVol = PlayerPrefs.GetFloat(parameterName, mainMenuSlider.maxValue);
+        savedVol = PlayerPrefs.GetFloat(parameterName, mainMenuSlider.maxValue);
         SetVolume(savedVol);
         mainMenuSlider.value = savedVol;
         mainMenuSlider.onValueChanged.AddListener((float _) => SetVolume(_));
@@ -23,6 +25,17 @@ public class Volume : MonoBehaviour
         // Pause Menu Slider
         savedVol = PlayerPrefs.GetFloat(parameterName, pauseMenuSlider.maxValue);
         SetVolume(savedVol);
+        pauseMenuSlider.value = savedVol;
+        pauseMenuSlider.onValueChanged.AddListener((float _) => SetVolume(_));
+    }
+
+    private void Update()
+    {
+        savedVol = PlayerPrefs.GetFloat(parameterName, mainMenuSlider.maxValue);
+        mainMenuSlider.value = savedVol;
+        mainMenuSlider.onValueChanged.AddListener((float _) => SetVolume(_));
+
+        savedVol = PlayerPrefs.GetFloat(parameterName, pauseMenuSlider.maxValue);
         pauseMenuSlider.value = savedVol;
         pauseMenuSlider.onValueChanged.AddListener((float _) => SetVolume(_));
     }

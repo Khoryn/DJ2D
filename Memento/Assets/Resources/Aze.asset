@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Aze
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 70204d73-8080-49fd-9de0-c3cd82bac0d7
+    PortName: Next
+    TargetNodeGUID: d655ca54-0709-4fcf-b226-d4a500001060
+  - BaseNodeGUID: d655ca54-0709-4fcf-b226-d4a500001060
+    PortName: Option 1
+    TargetNodeGUID: c0751c38-6f49-4571-a425-fc7b8362546b
+  DialogueNodeData:
+  - NodeGUID: d655ca54-0709-4fcf-b226-d4a500001060
+    DialogueText: Hi world, sup
+    Position: {x: 298, y: 200}
+  - NodeGUID: c0751c38-6f49-4571-a425-fc7b8362546b
+    DialogueText: Fuck off!
+    Position: {x: 647, y: 202}
+  ExposedProperties:
+  - PropertyName: New String
+    PropertyValue: New Value
+  - PropertyName: New String(1)
+    PropertyValue: New Value
+  - PropertyName: New String(1)(1)
+    PropertyValue: New Value
+  CommentBlockData: []

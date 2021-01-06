@@ -15,4 +15,14 @@ public class Enemy : MonoBehaviour
     {
         
     }
+
+    private void SearchForPlayer()
+    {
+      
+    }
+
+    private void ChasePlayer()
+    {
+
+    }
 }

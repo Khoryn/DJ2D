@@ -274,7 +274,8 @@ public class Player : MonoBehaviour
             controller.playerDeath = false;
             velocity.x = 0;
             transform.position = playerCheckpoint;
-            StartCoroutine(guiManager.Fade(3f));
+            StartCoroutine(guiManager.Fade(1f));
+            Camera.main.transform.position = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y + 5);
         }
     }
 

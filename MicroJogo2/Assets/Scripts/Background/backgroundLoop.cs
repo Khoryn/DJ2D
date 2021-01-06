@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class backgroundLoop : MonoBehaviour
+public class BackgroundLoop : MonoBehaviour
 {
     public GameObject[] levels;
     private Camera mainCamera;
@@ -16,10 +16,10 @@ public class backgroundLoop : MonoBehaviour
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
         foreach (GameObject obj in levels)
         {
-            loadChildObjects(obj);
+            LoadChildObjects(obj);
         }
     }
-    void loadChildObjects(GameObject obj)
+    void LoadChildObjects(GameObject obj)
     {
         float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x - choke;
         int childsNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth);
@@ -34,7 +34,7 @@ public class backgroundLoop : MonoBehaviour
         Destroy(clone);
         Destroy(obj.GetComponent<SpriteRenderer>());
     }
-    void repositionChildObjects(GameObject obj)
+    void RepositionChildObjects(GameObject obj)
     {
         Transform[] children = obj.GetComponentsInChildren<Transform>();
         if (children.Length > 1)
@@ -67,7 +67,7 @@ public class backgroundLoop : MonoBehaviour
     {
         foreach (GameObject obj in levels)
         {
-            repositionChildObjects(obj);
+            RepositionChildObjects(obj);
         }
     }
 }

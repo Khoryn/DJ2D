@@ -7,7 +7,7 @@ public class DialogueManager : MonoBehaviour
 {
     public Text nameText;
     public Text dialogueText;
-    public Image dialogueBox;
+    public GameObject dialogueBox;
 
     private Queue<string> sentences;
 

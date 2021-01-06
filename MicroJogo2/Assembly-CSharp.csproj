@@ -76,10 +76,10 @@
     <Compile Include="Assets\Art\Particles\RainMaker\Prefab\RainCollision.cs" />
     <Compile Include="Assets\Art\Particles\RainMaker\Prefab\RainScript.cs" />
     <Compile Include="Assets\Art\Particles\RainMaker\Prefab\RainScript2D.cs" />
+    <Compile Include="Assets\Scripts\Background\BackgroundLoop.cs" />
     <Compile Include="Assets\Scripts\Background\Parallax Final\Script\BackGround\BackGround.cs" />
     <Compile Include="Assets\Scripts\Background\Parallax Final\Script\BackGround\BackGroundLayer.cs" />
     <Compile Include="Assets\Scripts\Background\Parallax\Parallax.cs" />
-    <Compile Include="Assets\Scripts\Background\backgroundLoop.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
