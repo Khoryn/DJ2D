@@ -41,8 +41,7 @@ public class Player : MonoBehaviour
     [Header("Player Initial Settings")]
     public float distanceToCheckpoint = 3;
     public Transform checkpointContainer;
-    [HideInInspector]
-    public Vector2 initialPosition;
+    public Vector2 initialPosition = new Vector2();
     [HideInInspector]
     public Vector2 playerCheckpoint;
     [HideInInspector]
@@ -74,6 +73,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        // Player initial position
+        transform.position = initialPosition;
+
         // Set initial player movement speed
         moveSpeed = initialMoveSpeed;
         GravityAndJumpValues();
@@ -108,14 +110,12 @@ public class Player : MonoBehaviour
             // Player Movement
             Movement();
             MovementStates();
-            //PlayerIncreasedSpeed();
 
             // Dialogue
             Dialogue();
-            //guiManager.ToggleDialogueTextStart(distanceToNPC);
 
             // Player Death
-            //DeathOnCollision();
+            DeathOnCollision();
 
             // Animations
             RunAnimation();
@@ -125,9 +125,6 @@ public class Player : MonoBehaviour
             //Checkpoints
             SetNewPlayerCheckpoint(distanceToCheckpoint);
         }
-        //Debug.Log($"Game state is {GameState.state}");
-
-        //debugText.text = "Current checkpoint is" + playerCheckpoint;
     }
 
     #region Movement
@@ -310,29 +307,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    //private void DeathOnCollision()
-    //{
-    //    if (controller.playerDeath)
-    //    {
-    //        controller.playerDeath = false;
-    //        velocity.x = 0;
-    //        transform.position = playerCheckpoint;
-    //        StartCoroutine(guiManager.Fade(1f));
-    //        Camera.main.transform.position = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y + 5);
-    //    }
-    //}
-
-    //private void PlayerIncreasedSpeed()
-    //{
-    //    if (Input.GetButton("L2") && controller.collisions.below)
-    //    {
-    //        //moveSpeed = boostedMoveSpeed;
-    //    }
-    //    else
-    //    {
-    //        //moveSpeed = initialMoveSpeed;
-    //    }
-    //}
+    private void DeathOnCollision()
+    {
+        if (controller.playerDeath)
+        {
+            controller.playerDeath = false;
+            velocity.x = 0;
+            transform.position = playerCheckpoint;
+            StartCoroutine(guiManager.Fade(2f));
+        }
+    }
 
     private void AnimTrigger(string triggerName)
     {

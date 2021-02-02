@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Camera\Parallax.cs" />
     <Compile Include="Assets\Scripts\Dialogue System\DialogueParser.cs" />
     <Compile Include="Assets\Scripts\GUI\GuiManager.cs" />
+    <Compile Include="Assets\Scripts\General\Reset.cs" />
     <Compile Include="Assets\Scripts\NPC's\CheckPoints\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\NPC's\NPC.cs" />
     <Compile Include="Assets\Scripts\NPC's\NPC\Aze.cs" />
@@ -85,12 +86,13 @@
     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Raycast\RayCastController.cs" />
     <Compile Include="Assets\Scripts\Sound\Sound.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundManager.cs" />
     <Compile Include="Assets\Scripts\State\GameState.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Art\Environnment\Ciconia Studio\2D Environment\Black&amp;White 2D Forest\Shader\Animated Fog ASE.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\Art\Fonts\bloodcrow.txt" />
+    <None Include="Assets\Art\Fonts\bloodcrow\bloodcrow.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Art\Rain\RainMaker\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />

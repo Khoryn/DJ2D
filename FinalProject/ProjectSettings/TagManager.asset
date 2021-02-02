@@ -7,6 +7,7 @@ TagManager:
   - DialogueButton
   - NPC Checkpoint
   - Checkpoint
+  - Death
   layers:
   - Default
   - TransparentFX

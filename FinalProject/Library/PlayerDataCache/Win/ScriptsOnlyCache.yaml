@@ -14,6 +14,7 @@ ScriptsOnlyBuild:
     - NPC
     - Player
     - PlayerInput
+    - Reset
     - Sound
     - Subtegral.DialogueSystem.DataContainers.DialogueContainer
     Unity.2D.Tilemap.Editor.dll:
@@ -96,53 +97,55 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11280}
     - Class: 114
-      Script: {instanceID: 11378}
+      Script: {instanceID: 11312}
     - Class: 114
-      Script: {instanceID: 11464}
+      Script: {instanceID: 11380}
     - Class: 114
-      Script: {instanceID: 11506}
+      Script: {instanceID: 11466}
     - Class: 114
-      Script: {instanceID: 11690}
+      Script: {instanceID: 11508}
     - Class: 114
       Script: {instanceID: 11692}
     - Class: 114
-      Script: {instanceID: 11930}
+      Script: {instanceID: 11694}
     - Class: 114
-      Script: {instanceID: 11948}
+      Script: {instanceID: 11932}
     - Class: 114
-      Script: {instanceID: 11956}
+      Script: {instanceID: 11950}
     - Class: 114
-      Script: {instanceID: 12282}
+      Script: {instanceID: 11958}
     - Class: 114
-      Script: {instanceID: 12450}
+      Script: {instanceID: 12284}
     - Class: 114
-      Script: {instanceID: 12512}
+      Script: {instanceID: 12452}
     - Class: 114
-      Script: {instanceID: 12592}
+      Script: {instanceID: 12514}
     - Class: 114
-      Script: {instanceID: 12606}
+      Script: {instanceID: 12594}
     - Class: 114
-      Script: {instanceID: 12710}
+      Script: {instanceID: 12608}
     - Class: 114
-      Script: {instanceID: 12808}
+      Script: {instanceID: 12648}
     - Class: 114
-      Script: {instanceID: 12858}
+      Script: {instanceID: 12714}
     - Class: 114
-      Script: {instanceID: 12876}
+      Script: {instanceID: 12812}
     - Class: 114
-      Script: {instanceID: 13048}
+      Script: {instanceID: 12862}
     - Class: 114
-      Script: {instanceID: 13112}
+      Script: {instanceID: 12880}
     - Class: 114
-      Script: {instanceID: 13122}
+      Script: {instanceID: 13052}
     - Class: 114
-      Script: {instanceID: 13198}
+      Script: {instanceID: 13116}
     - Class: 114
-      Script: {instanceID: 13274}
+      Script: {instanceID: 13126}
     - Class: 114
-      Script: {instanceID: 13292}
+      Script: {instanceID: 13202}
     - Class: 114
-      Script: {instanceID: 88122}
+      Script: {instanceID: 13278}
+    - Class: 114
+      Script: {instanceID: 13296}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -166,6 +169,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
       Script: {instanceID: 0}
     - Class: 241
       Script: {instanceID: 0}
@@ -192,6 +197,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SelectionCaret
+  - hash:
+      serializedVersion: 2
+      Hash: cfb901ef65a888e78ac6ef63c7b70981
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Sound
   - hash:
       serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
@@ -320,7 +331,7 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
-      Hash: 3fb4cb192022f24553e3a6092cd88094
+      Hash: 755411e107d46ef43eacdf2014bade57
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Aze
@@ -524,13 +535,19 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Reset
+  - hash:
+      serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: b2a3dc19885c5d5d17cec24e99fe3103
+      Hash: 913985a129531ba90092068b04ce0656
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GuiManager
@@ -542,7 +559,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 798d53474eca86cef25007f4250fbf7a
+      Hash: fb3f90156ebd589e166e1afdf5259a90
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NPC
@@ -702,12 +719,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 53852cffe8ba4c29a8fd2cafc06bc8df
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Sound
   platform: 5
   scenePathNames:
   - Assets/Scenes/MainScene.unity

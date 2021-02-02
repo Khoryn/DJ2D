@@ -11,11 +11,14 @@ using System.Text.RegularExpressions;
 
 public class DialogueParser : MonoBehaviour
 {
-    [SerializeField] private DialogueContainer dialogue;
-    [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private TextMeshProUGUI npcName;
+    public DialogueContainer dialogue;
+    [SerializeField] private Text dialogueText;
+    [SerializeField] private Text npcName;
     [SerializeField] private Button choicePrefab;
     [SerializeField] private Transform buttonContainer;
+
+    [HideInInspector]
+    public bool hasTalked = false;
 
     [HideInInspector]
     public NodeLinkData narrativeData;
@@ -35,7 +38,7 @@ public class DialogueParser : MonoBehaviour
     {
         if (buttonContainer.childCount <= 0 && GameState.IsTalking)
         {
-            StartCoroutine(EndDialogue(2));
+            StartCoroutine(EndDialogue(4));
         }
     }
 

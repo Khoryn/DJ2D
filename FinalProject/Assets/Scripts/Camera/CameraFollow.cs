@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        if (gui.mainMenu.activeInHierarchy)
+        if (gui.mainMenu.activeInHierarchy || gui.creditsScreen.activeInHierarchy || gui.settingsMenuMain.activeInHierarchy)
         {
             transform.position = mainMenuPosition;
         }

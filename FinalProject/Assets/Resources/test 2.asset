@@ -17,10 +17,10 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGUID: 4581357c-6033-4b46-b399-f07fd889f145
   - BaseNodeGUID: 4581357c-6033-4b46-b399-f07fd889f145
-    PortName: test
+    PortName: test[0]
     TargetNodeGUID: 4ef837d6-d625-4118-b79f-cdf8d4014199
   - BaseNodeGUID: 4581357c-6033-4b46-b399-f07fd889f145
-    PortName: test 2
+    PortName: test 2[0]
     TargetNodeGUID: 29c6824c-df1e-49d9-a2a1-b30e41d05235
   DialogueNodeData:
   - NodeGUID: 4581357c-6033-4b46-b399-f07fd889f145
