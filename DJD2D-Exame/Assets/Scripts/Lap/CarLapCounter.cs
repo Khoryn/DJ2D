@@ -6,26 +6,31 @@ using UnityEngine.UI;
 public class CarLapCounter : MonoBehaviour
 {
     [Header("First Trigger")]
-    public TrackLapTrigger first;
+    [SerializeField]
+    private TrackLapTrigger first;
 
-    public Text lapCounter;
-    public Text lapTime;
+    [Header("UI Text")]
+    [SerializeField]
+    private Text lapCounter;
+    [SerializeField]
+    private Text lapTime;
 
-    TrackLapTrigger next;
-    int _lap;
-    float time;
-    float minutes;
-    float seconds;
-    float milliseconds;
+    private int lap;
+    private float minutes;
+    private float seconds;
+    private float milliseconds;
 
-    bool startCounter = false;
+    private bool startCounter = false;
 
+    private float time;
     public float LapTime { get { return time; } }
 
-    [HideInInspector]
-    public float bestTime;
+    private float bestTime;
+    public float BestTime { get { return bestTime; } }
 
     private GameObject skidMarks;
+
+    TrackLapTrigger next;
 
     // Use this for initialization
     void Start()
@@ -33,7 +38,7 @@ public class CarLapCounter : MonoBehaviour
         skidMarks = GameObject.Find("Game Manager");
         lapTime.gameObject.SetActive(false);
 
-        _lap = 1;
+        lap = 1;
         SetNextTrigger(first);
         UpdateText();
     }
@@ -43,17 +48,18 @@ public class CarLapCounter : MonoBehaviour
         Timer();
     }
 
-    // update lap counter text
+    // Update lap counter text
     void UpdateText()
     {
         if (lapCounter)
         {
-            lapCounter.text = string.Format("Lap {0}", _lap);
+            lapCounter.text = string.Format("Lap {0}", lap);
         }
     }
 
     private void Timer()
     {
+        // Set the lap time based on minutes, seconds and milliseconds
         if (startCounter)
         {
             time += Time.deltaTime;
@@ -65,6 +71,7 @@ public class CarLapCounter : MonoBehaviour
 
     IEnumerator ShowLapTime(float time)
     {
+        // Show lap time after the player enter's the Start/Finish line
         lapTime.gameObject.SetActive(true);
         lapTime.text = string.Format("{0}:{1}:{2}", minutes, seconds, (int)milliseconds);
         StartCoroutine(ResetTimer(0.05f));
@@ -74,31 +81,30 @@ public class CarLapCounter : MonoBehaviour
 
     IEnumerator ResetTimer(float time)
     {
+        // Reset the timer after the player enters the Start / Finish line
         startCounter = false; 
         yield return new WaitForSeconds(time);
         startCounter = true;
     }
 
-    // when lap trigger is entered
+    // When enter lap trigger
     public void OnLapTrigger(TrackLapTrigger trigger)
     {
         if (trigger == next)
         {
-            if (first == next)
+            if (first == next) // If the player is back on the initial trigger
             {
-                time = 0;
-                _lap++;
-                UpdateText();
-                StartCoroutine(ShowLapTime(2));
-                if (_lap == 1)
+                time = 0; // Reset lap time
+                lap++; // Increment lap
+                UpdateText(); 
+                StartCoroutine(ShowLapTime(2)); // Show lap time
+                if (lap == 1)
                 {
                     bestTime = time;
-                }
-              
+                }   
                 BestLapTime();
-
             }
-            SetNextTrigger(next);
+            SetNextTrigger(next); // Set the next trigger
         }
 
         if (trigger == first)
@@ -109,16 +115,13 @@ public class CarLapCounter : MonoBehaviour
 
     private void BestLapTime()
     {
-        if (_lap > 1)
+        if (lap > 1)
         {
             if (time < bestTime)
             {
                 bestTime = time;
             }
         }
-       
-
-        Debug.Log(bestTime);
     }
 
     void SetNextTrigger(TrackLapTrigger trigger)

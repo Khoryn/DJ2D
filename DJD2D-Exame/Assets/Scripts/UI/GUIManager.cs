@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GUIManager : MonoBehaviour
 {
-    [Header("Text fields")]
+    [Header("Text field - Player")]
     [SerializeField]
     private Text playerVelocityText;
 
@@ -16,6 +16,7 @@ public class GUIManager : MonoBehaviour
     [SerializeField]
     private Text rankText;
 
+    [Header("Text field - Time")]
     [SerializeField]
     private Text timeText;
 
@@ -23,11 +24,17 @@ public class GUIManager : MonoBehaviour
     private Text countDownText;
 
     [SerializeField]
-    private Text timeIsUp;
+    private Text timeIsUpText;
 
+    [Header("Text field - Missiles")]
+    [SerializeField]
+    private Text missileCounterText;
+
+    [Header("Main Menu")]
     [SerializeField]
     private GameObject mainMenu;
 
+    [Header("Return Button")]
     [SerializeField]
     private Button returnButton;
 
@@ -47,17 +54,20 @@ public class GUIManager : MonoBehaviour
 
     // Script References
     Player player;
-    CarController playerCar;
     AICarMovement ai;
+    CarLapCounter carLapCounter;
 
     private void Start()
     {
+        // Script References
         player = FindObjectOfType<Player>();
-        playerCar = FindObjectOfType<CarController>();
         ai = FindObjectOfType<AICarMovement>();
+        carLapCounter = FindObjectOfType<CarLapCounter>();
 
+        // Activate main menu on game start
         mainMenu.SetActive(true);
 
+        // Set initial values
         startingTimer = timer;
         startingCountDown = countDown;
     }
@@ -67,6 +77,7 @@ public class GUIManager : MonoBehaviour
         DisplayVelocity();
         PlayTime();
         Ranking();
+        DisplayMissileCounter();
 
         if (!mainMenu.activeInHierarchy)
         {
@@ -77,8 +88,7 @@ public class GUIManager : MonoBehaviour
         {
             Time.timeScale = 0;
         }
-
-        playerScoreText.text = "Score " + player.score; 
+        playerScoreText.text = "Score " + player.Score; 
     }
 
     public void StartGame()
@@ -94,35 +104,34 @@ public class GUIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        //// Reset positions
-        //playerCar.transform.position = playerCar.startPosition;
-        //player.transform.Rotate(new Vector3(0, 0, 0));
-        //ai.transform.position = ai.startPosition;
-        //ai.transform.Rotate(new Vector3(0, 0, 0));
-
-        //// Reset timers
-        //timer = startingTimer;
-        //countDown = startingCountDown;
-
+        // Reset scene
         SceneManager.LoadScene("MainScene");
     }
 
     private void DisplayVelocity()
     {
+        // Display player's velocity in km's / h
         playerVelocityText.text = $"{player.CurrentVelocityinKms()} km/h";
     }
 
+    private void DisplayMissileCounter()
+    {
+        // Display player's missile counter
+        missileCounterText.text = "Missiles " + player.MissileCounter;
+    }
+   
     private void PlayTime()
     {
         if (!GameState.IsPaused)
         {
+            // Start game timer
             timer -= Time.deltaTime;
-            timeText.text = "Time " + Mathf.Round(timer);
+            timeText.text = "Time " + Mathf.Round(timer); // Round up the game timer
             if (timer <= 0)
             {
-                GameState.ChangeState(GameState.States.Pause);
+                GameState.ChangeState(GameState.States.Pause); // Set the game state to Paused if the timer reaches 0
                 timer = 0;
-                timeIsUp.gameObject.SetActive(true);
+                timeIsUpText.gameObject.SetActive(true);
                 returnButton.gameObject.SetActive(true);
             }
         }
@@ -130,12 +139,13 @@ public class GUIManager : MonoBehaviour
         if (timer > 0)
         {
             returnButton.gameObject.SetActive(false);
-            timeIsUp.gameObject.SetActive(false);
+            timeIsUpText.gameObject.SetActive(false);
         }
     }
 
     private void StartGameCountdown()
     {
+        // When the game starts, set the race countdown
         countDown -= Time.deltaTime;
         countDownText.text = Mathf.Round(countDown).ToString();
         if (countDown <= 0 && timer > 0)
@@ -152,23 +162,25 @@ public class GUIManager : MonoBehaviour
 
         GameObject ai = GameObject.Find("AI");
 
-        if (IsInFront(player, ai))
+        if (IsInFront(player, ai)) // If the player is in front of the AI, set it's rank to 1
         {
             rankText.text = "Rank 1";
         }
-        else
+        else // If the player is in behind of the AI, set it's rank to 2
         {
             rankText.text = "Rank 2";
         }
     }
 
-    private bool IsInFront(GameObject p, GameObject a)
+    private bool IsInFront(GameObject player, GameObject ai)
     {
-        return Vector3.Dot(Vector3.up, p.transform.InverseTransformPoint(a.transform.position)) < 0;
+        // Check if the player is in front or behind the AI, needs work
+        return Vector3.Dot(Vector3.up, player.transform.InverseTransformPoint(ai.transform.position)) < 0;
     }
 
     public void QuitGame()
     {
+        // Quit the game
         Application.Quit();
     }
 }

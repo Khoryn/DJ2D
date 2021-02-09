@@ -12,18 +12,22 @@ public class GameState
     public static void ChangeState(States stateTo)
     {
         if (state == stateTo)
+        {
             return;
+        }
         state = stateTo;
     }
 
     public static bool IsState(States stateTo)
     {
         if (state == stateTo)
+        {
             return true;
+        }
         return false;
     }
 
-    // Paused
+    // Paused State
     public static bool IsPaused
     {
         get
@@ -32,7 +36,7 @@ public class GameState
         }
     }
 
-    // Playing
+    // Playing State
     public static bool IsPlaying
     {
         get
@@ -41,7 +45,7 @@ public class GameState
         }
     }
 
-    // Won
+    // Won State
     public static bool IsWon
     {
         get
@@ -50,7 +54,7 @@ public class GameState
         }
     }
 
-    // Lost
+    // Lost State
     public static bool IsLost
     {
         get
@@ -59,7 +63,7 @@ public class GameState
         }
     }
 
-    // Lost
+    // Lost State
     public static bool TimeIsUp
     {
         get

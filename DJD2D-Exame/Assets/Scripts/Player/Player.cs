@@ -6,35 +6,42 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int score = 0;
+    [SerializeField]
+    private int score = 0;
 
-    public int missileCounter;
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
+    }
 
-    public GameObject missilePrefab;
+    [SerializeField]
+    private int missileCounter;
 
-    public Text missileCounterText;
+    public int MissileCounter { get { return missileCounter; } }
 
+    [SerializeField]
+    private GameObject missilePrefab;
 
     AICarMovement ai;
+
     private void Start()
     {
         ai = FindObjectOfType<AICarMovement>();
 
-        GameState.ChangeState(GameState.States.Pause);     
+        // Set initial game state
+        GameState.ChangeState(GameState.States.Pause);
     }
 
     private void Update()
     {
-        //Debug.Log(GameState.state);
-
         FireProjectile();
         MoveMissile();
-
-        missileCounterText.text = "Missiles " + missileCounter;
     }
 
     public float CurrentVelocityinKms()
     {
+        // Convert rigidbody velocity to km's /h 
         return (float)Math.Round(GetComponent<Rigidbody2D>().velocity.magnitude * 3.6f, 0);
     }
 
@@ -44,10 +51,10 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (missileCounter > 0)
+                if (missileCounter > 0) // Fire missile if counter is greater than 0
                 {
-                    missileCounter--;
-                    Missile();
+                    missileCounter--; // Reduce missile counter
+                    Missile(); // Fire missile
                     Debug.Log("Fire Missile");
                 }
                 else
@@ -60,7 +67,7 @@ public class Player : MonoBehaviour
 
     private void Missile()
     {
-        GameObject missile = Instantiate(missilePrefab, transform.position, Quaternion.identity);
+        GameObject missile = Instantiate(missilePrefab, transform.position, Quaternion.identity); // Instantiate missile at player's position
     }
 
     private void MoveMissile()
@@ -68,26 +75,26 @@ public class Player : MonoBehaviour
         GameObject[] missiles = GameObject.FindGameObjectsWithTag("Missile");
         foreach (GameObject missile in missiles)
         {
-            missile.transform.LookAt(ai.transform.position);
+            missile.transform.LookAt(ai.transform.position); // Rotate missile to it looks at ai transform
             missile.transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
             if (Vector3.Distance(missile.transform.position, ai.transform.position) > 1)
             {
-                missile.transform.Translate(new Vector3(45 * Time.deltaTime, 0, 0));
+                missile.transform.Translate(new Vector3(45 * Time.deltaTime, 0, 0)); // Move missile while it's distance to AI is greater than 1
             }
             else
             {
-                StartCoroutine(ReduceSpeed(3));
+                StartCoroutine(ReduceSpeed(3)); // After the missile hits the AI, reduce the AI's speed temporarily
                 Destroy(missile);
-                score += 500;
+                score += 500; // When the missile hits the AI, increase score by 500
             }
         }
     }
 
     IEnumerator ReduceSpeed(float time)
     {
-        ai.maxSpeed -= 20;
+        ai.MaxSpeed -= 20; // Reduce the AI's speed by 20
         yield return new WaitForSeconds(time);
-        ai.maxSpeed = ai.initialSpeed;
+        ai.MaxSpeed = ai.InitialSpeed; // Reset the AI's speed
     }
 }

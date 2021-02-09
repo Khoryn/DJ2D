@@ -13,8 +13,7 @@ public class TrackLapTrigger : MonoBehaviour
         CarLapCounter carLapCounter = other.gameObject.GetComponent<CarLapCounter>();
         if (carLapCounter)
         {
-            //Debug.Log("lap trigger " + gameObject.name);
-            carLapCounter.OnLapTrigger(this);
+            carLapCounter.OnLapTrigger(this); // When the player enters, set the next trigger
         }
     }
 }

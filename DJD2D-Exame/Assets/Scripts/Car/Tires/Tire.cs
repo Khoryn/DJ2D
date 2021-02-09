@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Tire : MonoBehaviour
 {
-    [SerializeField] float intensityModifier = 1.5f;
-    SkidMarks skidMarksController;
-    CarController carController;
-    Player player;
+    [SerializeField]
+    private float intensityModifier = 1.5f;
+
+    private int lastSkidId = -1;
 
     ParticleSystem particles;
 
-    int lastSkidId = -1;
+    // References
+    SkidMarks skidMarksController;
+    CarController carController;
+    Player player;
 
     private void Start()
     {
@@ -23,41 +26,38 @@ public class Tire : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameState.IsPlaying)
+        if (GameState.IsPlaying) // If the race has begun
         {
-            float intensity = Mathf.Abs(carController.DriftForce);
+            float intensity = Mathf.Abs(carController.DriftForce); // Get the player's current drift force, which is based on it's direction
 
             if (intensity < 0)
             {
-                intensity = -intensity;
+                intensity = -intensity; // Reduce intensity
             }
 
             if (intensity > 3f)
             {
-                player.score += 10;
-                lastSkidId = skidMarksController.AddSkidMark(transform.position, transform.up, intensity * intensityModifier, lastSkidId);
+                player.Score += 10; // Increase player's score based on it's drift
+                lastSkidId = skidMarksController.AddSkidMark(transform.position, transform.up, intensity * intensityModifier, lastSkidId); // Add skid marks on the tire's position
 
                 if (particles != null && !particles.isPlaying)
                 {
-                    particles.Play();
+                    particles.Play(); // Play the dust particle
                 }
             }
             else
             {
-                lastSkidId = -1;
+                lastSkidId = -1; // Set the id to -1 in order to stop the skid marks
 
                 if (particles != null && particles.isPlaying)
                 {
-                    particles.Stop();
+                    particles.Stop(); // Stop playing the particle system
                 }
             }
-
-            Debug.Log(intensity);
         }
         else
         {
-            particles.Stop();
+            particles.Stop(); // Stop playing the particle system
         }
-
     }
 }

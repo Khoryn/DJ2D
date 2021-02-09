@@ -5,18 +5,24 @@ using System;
 
 public class CarController : MonoBehaviour
 {
-    [SerializeField]
-    private float acceleration;
     [HideInInspector]
     public float initialSpeed;
+
+    [Header("Velocity")]
+    [SerializeField]
+    private float acceleration;
+
     public float Acceleration
     {
         get { return acceleration; }
         set { acceleration = value; }
     }
 
+    [Header("Steering")]
     [SerializeField]
     private float steering;
+
+    private Rigidbody2D rb;
 
     private float driftForce;
 
@@ -25,20 +31,18 @@ public class CarController : MonoBehaviour
         get { return driftForce; }
     }
 
-    private Rigidbody2D rb;
-
-    public Vector2 startPosition;
-
     void Start()
     {
+        // Set the player's initial speed
         initialSpeed = acceleration;
-        transform.position = startPosition;
 
+        // Get the player's rigidbody component
         rb = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
+        // If the game isn't paused, allow the car to move
         if (!GameState.IsPaused)
         {
             CarMovement();
@@ -47,14 +51,18 @@ public class CarController : MonoBehaviour
 
     private void CarMovement()
     {
+        // Get the horizontal and vertical input
         float horizontalInput = -Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
+        // Set the player's speed based on it's input and acceleration
         Vector2 speed = transform.up * (verticalInput * acceleration);
         rb.AddForce(speed);
 
+        // Set the direction
         float direction = Vector2.Dot(rb.velocity, rb.GetRelativeVector(Vector2.up));
 
+        // Rotate the riggidbody based on input
         if (direction >= 0.0f)
         {
             rb.rotation += horizontalInput * steering * (rb.velocity.magnitude / 5.0f);
@@ -77,6 +85,7 @@ public class CarController : MonoBehaviour
             steeringRightAngle = 90;
         }
 
+        // Set the player's drift based on it's current steering
         Vector2 rightAngleFromForward = Quaternion.AngleAxis(steeringRightAngle, Vector3.forward) * forward;
 
         driftForce = Vector2.Dot(rb.velocity, rb.GetRelativeVector(rightAngleFromForward.normalized));
